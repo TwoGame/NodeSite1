@@ -1,0 +1,36 @@
+function load_1(){
+    loadFile('/link1');
+}
+
+function load_2(){
+    loadFile('/link2');
+}
+
+function load_3(){
+    loadFile('/link3');
+}
+
+function load_4(){
+    loadFile('/link4');
+}
+
+function load_5(){
+	onLoad();
+}
+
+function load_6(){
+    loadFile('/link6');
+}
+
+function loadFile(link){
+    fetch(link)
+        .then(response => response.text())
+        .then(text => {
+            // Вставка текста в HTML
+            document.querySelector('.main').innerHTML = text;
+            //document.querySelector('.main').textContent = text;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}

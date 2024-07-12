@@ -1,0 +1,821 @@
+class Vector {
+  constructor(x, y, z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+
+  plus(other) {
+    const sumX = this.x + other.x;
+    const sumY = this.y + other.y;
+    const sumZ = this.z + other.z;
+    return new Vector(sumX, sumY, sumZ);
+  }
+
+  scalar(other) {
+    const productX = this.x * other.x;
+    const productY = this.y * other.y;
+    const productZ = this.z * other.z;
+    return productX + productY + productZ;
+  }
+
+  get length() {
+    return Math.sqrt(this.x ** 2 + this.y ** 2 + this.z ** 2);
+  }
+
+  toString() {
+    return `Vector(${this.x}, ${this.y}, ${this.z})`;
+  }
+
+  valueOf() {
+    return this.length;
+  }
+}
+
+function task4_1(){
+	const vector1 = new Vector(document.getElementById('input_1_1').value,document.getElementById('input_1_2').value, document.getElementById('input_1_3').value);
+	const vector2 = new Vector(document.getElementById('input_1_4').value, document.getElementById('input_1_5').value, document.getElementById('input_1_6').value);
+	
+	document.getElementById('output_1').innerHTML = '<br>V1 + V2 =' + vector1.plus(vector2);
+	document.getElementById('output_1').innerHTML += '<br>V1 * V2 =' + vector1.scalar(vector2);
+	document.getElementById('output_1').innerHTML += '<br>V1.length = ' + vector1.length;
+	document.getElementById('output_1').innerHTML += '<br> V1 =' + vector1.toString();
+	document.getElementById('output_1').innerHTML += '<br>V1.length = ' + vector1.valueOf();
+}
+
+class task4 {
+  constructor(title, description, startDate, endDate) {
+    this.title = title;
+    this.description = description;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.subtask4s = [];
+  }
+
+  addSubtask4(subtask4) {
+    this.subtask4s.push(subtask4);
+  }
+  
+  toString() {
+    return `Название: ${this.title}, описание: ${this.description}, начало: ${this.startDate}, конец: ${this.endDate}`;
+  }
+}
+
+class Executabletask4 extends task4 {
+  constructor(title, description, startDate, endDate) {
+    super(title, description, startDate, endDate);
+    this.completionPercentage = 0;
+    this.isCompleted = false;
+  }
+  
+  toString() {
+    return `Название: ${this.title}, описание: ${this.description}, начало: ${this.startDate}, конец: ${this.endDate}, процент выполнения: ${this.completionPercentage}%, выполнен: ${this.isCompleted}`;
+  }
+}
+
+function task4_2(){
+	const task41 = new task4(
+	  document.getElementById('input_2_1').value,
+	  document.getElementById('input_2_2').value,
+	  document.getElementById('input_2_3').value,
+	  document.getElementById('input_2_4').value
+	);
+
+	const task42 = new Executabletask4(
+	  document.getElementById('input_2_5').value,
+	  document.getElementById('input_2_6').value,
+	  document.getElementById('input_2_7').value,
+	  document.getElementById('input_2_8').value
+	);
+	task42.completionPercentage = document.getElementById('input_2_9').value;
+	task42.isCompleted = document.getElementById('input_2_10').value;
+
+	task41.addSubtask4(task42);
+
+	const output = document.getElementById('output_2');
+
+	output.innerHTML = task41.toString();
+	output.innerHTML += '<br>' + task42.toString();
+}
+
+class Point {
+  constructor(x, y, z, name) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+    this.name = name;
+  }
+  
+  toString() {
+    return `Point(${this.x}, ${this.y}, ${this.z})`;
+  }
+}
+
+class ColorPoint extends Point {
+  constructor(x, y, z, name, color) {
+    super(x, y, z, name);
+    this.color = color;
+  }
+  
+  toString() {
+    return `Point(${this.x}, ${this.y}, ${this.z}, ${this.color})`;
+  }
+}
+
+// Создание коллекции объектов
+const points = [
+  new ColorPoint(1, 2, 3, "Точка 1", "красный"),
+  new ColorPoint(4, 5, 6, "Точка 2", "синий"),
+  new ColorPoint(7, 8, 9, "Точка 3", "зеленый"),
+];
+
+// Функция для поиска ближайшей точки
+function findNearestPoint(x, y, z) {
+  let nearestPoint = null;
+  let minDistance = Infinity;
+
+  for (const point of points) {
+    const distance = Math.sqrt(
+      Math.pow(point.x - x, 2) +
+        Math.pow(point.y - y, 2) +
+        Math.pow(point.z - z, 2)
+    );
+
+    if (distance < minDistance) {
+      nearestPoint = point;
+      minDistance = distance;
+    }
+  }
+
+  return nearestPoint;
+}
+
+function task4_3(){
+	const x = document.getElementById('input_3_1').value;
+	const y = document.getElementById('input_3_2').value;
+	const z = document.getElementById('input_3_3').value;
+	
+	const nearestPoint = findNearestPoint(x, y, z);
+	
+	const output = document.getElementById('output_3');
+	
+	for (const point of points) {
+		output.innerHTML += point + '<br>';
+	}
+	
+	output.innerHTML += "Ближайшая точка: " + nearestPoint;
+}
+
+class Фигура {
+  constructor(x1, y1) {
+    this.x1 = x1;
+    this.y1 = y1;
+  }
+}
+
+class Квадрат extends Фигура {
+  constructor(x1, y1, x2, y2) {
+    super(x1, y1);
+    this.x2 = x2;
+	this.y2 = y2;
+  }
+
+  площадь() {
+    return (this.x1 - this.x2)**2 + (this.y1 - this.y2)** 2;
+  }
+
+  периметр() {
+    return 4 * Math.sqrt((this.x1 - this.x2)**2 + (this.y1 - this.y2)**2);
+  }
+}
+
+class Круг extends Фигура {
+  constructor(x1, y1, x2, y2) {
+    super(x1, y1);
+    this.x2 = x2;
+	this.y2 = y2;
+  }
+
+  площадь() {
+    return Math.PI * Math.sqrt((this.x1 - this.x2)**2 + (this.y1 - this.y2)**2) ** 2;
+  }
+
+  периметр() {
+    return 2 * Math.PI * Math.sqrt((this.x1 - this.x2)**2 + (this.y1 - this.y2)**2);
+  }
+}
+
+class Треугольник extends Фигура {
+  constructor(x1, y1, x2, y2, x3, y3) {
+    super(x1, y1);
+    this.x2 = x2;
+	this.y2 = y2;
+	this.x3 = x3;
+	this.y3 = y3;
+  }
+
+  площадь() {
+    const p = this.периметр() / 2;
+    return Math.sqrt(p * (p - Math.sqrt((this.x1 - this.x2)**2 + (this.y1 - this.y2)**2)) * (p - Math.sqrt((this.x1 - this.x3)**2 + (this.y1 - this.y3)**2)) * (p - Math.sqrt((this.x3 - this.x2)**2 + (this.y3 - this.y2)**2)));
+  }
+
+  периметр() {
+    return Math.sqrt((this.x1 - this.x2)**2 + (this.y1 - this.y2)**2) + Math.sqrt((this.x1 - this.x3)**2 + (this.y1 - this.y3)**2) + Math.sqrt((this.x3 - this.x2)**2 + (this.y3 - this.y2)**2);
+  }
+}
+
+function task4_4(){
+	const output = document.getElementById('output_4');
+	
+	const квадрат = new Квадрат(
+	document.getElementById('input_4_1').value,
+	document.getElementById('input_4_2').value,
+	document.getElementById('input_4_3').value,
+	document.getElementById('input_4_4').value);
+	
+	output.innerHTML = "<br>Площадь квадрата: " + квадрат.площадь();
+	output.innerHTML += "<br>Периметр квадрата: " + квадрат.периметр();
+
+	const круг = new Круг(
+	document.getElementById('input_4_5').value,
+	document.getElementById('input_4_6').value,
+	document.getElementById('input_4_7').value,
+	document.getElementById('input_4_8').value);
+	
+	output.innerHTML += "<br>Площадь круга: " + круг.площадь();
+	output.innerHTML += "<br>Периметр круга: " + круг.периметр();
+
+	const треугольник = new Треугольник(
+	document.getElementById('input_4_9').value,
+	document.getElementById('input_4_10').value,
+	document.getElementById('input_4_11').value,
+	document.getElementById('input_4_12').value,
+	document.getElementById('input_4_13').value,
+	document.getElementById('input_4_14').value);
+	
+	output.innerHTML += "<br>Площадь треугольника: " + треугольник.площадь();
+	output.innerHTML += "<br>Периметр треугольника: " + треугольник.периметр();
+}
+
+class Работник {
+  constructor(имя, фамилия, ставка, отработанные_дни) {
+    this.имя = имя;
+    this.фамилия = фамилия;
+    this.ставка = ставка;
+    this.отработанные_дни = отработанные_дни;
+  }
+
+  getSalary() {
+    return this.ставка * this.отработанные_дни;
+  }
+}
+
+class Маляр extends Работник {
+  constructor(имя, фамилия, ставка, отработанные_дни) {
+    super(имя, фамилия, ставка, отработанные_дни);
+    this.тип_работ = "маляр";
+  }
+  
+    toString() {
+    return `Работник ${this.имя} ${this.имя}, ${this.тип_работ}`;
+  }
+}
+
+class Штукатур extends Работник {
+  constructor(имя, фамилия, ставка, отработанные_дни) {
+    super(имя, фамилия, ставка, отработанные_дни);
+    this.тип_работ = "штукатур";
+  }
+  
+  toString() {
+    return `Работник ${this.имя} ${this.имя}, ${this.тип_работ}`;
+  }
+}
+
+function task4_5(){
+	const работник1 = new Маляр(
+	document.getElementById('input_5_1').value,
+	document.getElementById('input_5_2').value,
+	document.getElementById('input_5_3').value,
+	document.getElementById('input_5_4').value);
+	
+	const работник2 = new Штукатур(
+	document.getElementById('input_5_5').value,
+	document.getElementById('input_5_6').value,
+	document.getElementById('input_5_7').value,
+	document.getElementById('input_5_8').value);
+
+	const бригада = [работник1, работник2];
+
+	const output = document.getElementById('output_5');
+	
+	output.innerHTML = "<br>Зарплата работника 1: " + работник1.getSalary();
+	output.innerHTML += "<br>Зарплата работника 2: " + работник2.getSalary();
+	output.innerHTML += "<br>Бригада:<br>";
+	for (const работник of бригада){
+		output.innerHTML += работник + "<br>";
+	}
+}
+
+class Validator {
+  constructor() {
+    this.fields = {};
+  }
+
+  setField(name, value) {
+    this.fields[name] = value;
+  }
+
+  getField(name) {
+    return this.fields[name];
+  }
+}
+
+class PhoneValidator extends Validator {
+  constructor() {
+    super();
+  }
+
+  validate(name) {
+    const phoneRegex = /^\+?\d{1,3}[- ]?\d{2,3}[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/;
+    const phone = this.getField(name);
+
+    if (!phoneRegex.test(phone)) {
+		return "Неправильный телефонный номер";
+    }
+	else{
+		return "Правильный телефонный номер";
+	}
+  }
+}
+
+class EmailValidator extends Validator {
+  constructor() {
+    super();
+  }
+
+  validate(name) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const email = this.getField(name);
+
+    if (!emailRegex.test(email)) {
+		return "Неправильный адрес электронной почты";
+    }
+	else {
+		return "Правильный адрес электронной почты";
+	}
+  }
+}
+
+class DomainValidator extends Validator {
+  constructor() {
+    super();
+  }
+
+  validate(name) {
+    const domainRegex = /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/i;
+    const domain = this.getField(name);
+
+    if (!domainRegex.test(domain)) {
+		return "Неправильный домен сайта";
+    }
+	else {
+		return "Правильный домен сайта";
+	}
+  }
+}
+
+function task4_6(){
+	const output = document.getElementById('output_6');
+	
+	const phoneValidator = new PhoneValidator();
+	phoneValidator.setField("phone", document.getElementById('input_6_1').value);
+	output.innerHTML = "<br>" + phoneValidator.validate("phone");
+
+	const emailValidator = new EmailValidator();
+	emailValidator.setField("email", document.getElementById('input_6_2').value);
+	output.innerHTML += "<br>" + emailValidator.validate("email");
+
+	const domainValidator = new DomainValidator();
+	domainValidator.setField("domain", document.getElementById('input_6_3').value);
+	output.innerHTML += "<br>" + domainValidator.validate("domain");
+}
+
+class Издание {
+  constructor(имя, год_издания, тип, авторы) {
+    this.имя = имя;
+    this.год_издания = год_издания;
+    this.тип = тип;
+    this.авторы = авторы;
+  }
+}
+
+class Книга extends Издание {
+  constructor(имя, год_издания, авторы, количество_страниц) {
+    super(имя, год_издания, "книга", авторы);
+    this.количество_страниц = количество_страниц;
+  }
+  
+  toString() {
+    return `Книга ${this.имя}, ${this.год_издания} год, ${this.авторы.toString()}, ${this.количество_страниц} страниц`;
+  }
+}
+
+class Журнал extends Издание {
+  constructor(имя, год_издания, авторы, номер) {
+    super(имя, год_издания, "журнал", авторы);
+    this.номер = номер;
+  }
+  
+  toString() {
+    return `Журнал ${this.имя}, ${this.год_издания} год, ${this.авторы.toString()}, №${this.номер}`;
+  }
+}
+
+class Газета extends Издание {
+  constructor(имя, год_издания, авторы, дата) {
+    super(имя, год_издания, "газета", авторы);
+    this.дата = дата;
+  }
+  
+  toString() {
+    return `Газета ${this.имя}, ${this.год_издания} год, ${this.авторы.toString()}, дата ${this.дата}`;
+  }
+}
+
+class Библиотека {
+  constructor() {
+    this.издания = [];
+  }
+
+  добавитьИздание(издание) {
+    this.издания.push(издание);
+  }
+
+  найтиИзданиеПоПараметрам(параметры) {
+    return this.издания.filter((издание) => {
+      for (const [ключ, значение] of Object.entries(параметры)) {
+        if (издание[ключ] !== значение) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }
+
+  отсортироватьПоАвтору() {
+    this.издания.sort(function(a, b){ 
+	if (a.авторы < b.авторы)
+	  return -1
+	if (a.авторы > b.авторы)
+	  return 1
+	return 0})
+  }
+}
+
+function task4_7(){
+	const библиотека = new Библиотека();
+
+	const книга1 = new Книга("Книга 1", 2023, ["Автор 6"], 100);
+	const книга2 = new Книга("Книга 2", 2022, ["Автор 5"], 200);
+	const журнал1 = new Журнал("Журнал 1", 2023, ["Автор 3", "Автор 5"], "№1");
+	const журнал2 = new Журнал("Журнал 2", 2022, ["Автор 3", "Автор 4"], "№2");
+	const газета1 = new Газета("Газета 1", 2023, ["Автор 2"], "01/01/2023");
+	const газета2 = new Газета("Газета 2", 2022, ["Автор 1"], "01/01/2022");
+
+	библиотека.добавитьИздание(книга1);
+	библиотека.добавитьИздание(книга2);
+	библиотека.добавитьИздание(журнал1);
+	библиотека.добавитьИздание(журнал2);
+	библиотека.добавитьИздание(газета1);
+	библиотека.добавитьИздание(газета2);
+
+	const результатыПоиска = библиотека.найтиИзданиеПоПараметрам({
+	  тип: document.getElementById('input_7_1').value,
+	});
+	
+	const output = document.getElementById('output_7');
+
+	output.innerHTML = "<br>Результаты поиска:";
+	
+	for (const результат of результатыПоиска){
+		output.innerHTML += "<br>" + результат;
+	}
+
+	библиотека.отсортироватьПоАвтору();
+
+	output.innerHTML += "<br>Отсортировано по автору:";
+	for (const издание of библиотека.издания){
+		output.innerHTML += "<br>" + издание;
+	}
+}
+
+class Студент {
+  constructor(фамилия, имя, специальность) {
+    this.фамилия = фамилия;
+    this.имя = имя;
+    this.специальность = специальность;
+  }
+}
+
+class СтудентМатематики extends Студент {
+	constructor(фамилия, имя) {
+		super(фамилия, имя, "математика");
+	}
+}
+
+class СтудентФизики extends Студент {
+	constructor(фамилия, имя) {
+		super(фамилия, имя, "физика");
+	}
+}
+
+class Факультет{
+	constructor(студенты) {
+		this.студенты = студенты;
+	};
+	
+	вывестиСтудентовПоСпециальности(специальность) {
+		const студентыПоСпециальности = this.студенты.filter(
+		  (студент) => студент.специальность === специальность
+		);
+
+		let txt = `<br>Студенты по специальности ${специальность}:`;
+		for (const студент of студентыПоСпециальности) {
+		  txt +=`<br>${студент.фамилия} ${студент.имя}`;
+		}
+		
+		return txt;
+	}
+  
+	найтиСтудента(фамилия) {
+		const студент = this.студенты.find(
+		  (студент) => студент.фамилия === фамилия
+		);
+
+		if (студент) {
+			return `<br>Студент ${студент.фамилия} ${студент.имя} найден`;
+		} else {
+			return `<br>Студента с фамилией ${фамилия} не найдено`;
+		}
+	}
+}
+
+function task4_8() {
+	const студенты = [
+    new СтудентМатематики("Иванов", "Иван"),
+    new СтудентФизики("Петров", "Петр"),
+    new СтудентМатематики("Сидоров", "Сидор"),
+    new СтудентФизики("Алексеев", "Алексей"),
+	];
+	
+	const факультет = new Факультет(студенты);
+	
+	const output = document.getElementById('output_8');
+	output.innerHTML = факультет.вывестиСтудентовПоСпециальности(document.getElementById('input_8_1').value);
+	output.innerHTML += факультет.найтиСтудента(document.getElementById('input_8_2').value);
+}
+
+class Автомобиль {
+  constructor(марка, год_выпуска, дата_обслуживания, регистрационный_номер) {
+    this.марка = марка;
+    this.год_выпуска = год_выпуска;
+    this.дата_обслуживания = дата_обслуживания;
+    this.регистрационный_номер = регистрационный_номер;
+  }
+}
+
+class ЛегковойАвтомобиль extends Автомобиль {
+  constructor(марка, год_выпуска, дата_обслуживания, регистрационный_номер) {
+    super(марка, год_выпуска, дата_обслуживания, регистрационный_номер);
+    this.категория = "легковой";
+  }
+  
+  toString() {
+    return `Автомобиль ${this.марка}, ${this.год_выпуска}, ${this.дата_обслуживания}, ${this.регистрационный_номер}, ${this.категория}`;
+  }
+}
+
+class ГрузовойАвтомобиль extends Автомобиль {
+  constructor(марка, год_выпуска, дата_обслуживания, регистрационный_номер) {
+    super(марка, год_выпуска, дата_обслуживания, регистрационный_номер);
+    this.категория = "грузовой";
+  }
+  
+  toString() {
+    return `Автомобиль ${this.марка}, ${this.год_выпуска}, ${this.дата_обслуживания}, ${this.регистрационный_номер}, ${this.категория}`;
+  }
+}
+
+class Автопарк {
+  constructor() {
+    this.автомобили = [];
+  }
+
+  добавитьАвтомобиль(автомобиль) {
+    this.автомобили.push(автомобиль);
+  }
+
+  найтиАвтомобильПоНомеру(регистрационный_номер) {
+    return this.автомобили.find(
+      (автомобиль) => автомобиль.регистрационный_номер === регистрационный_номер
+    );
+  }
+
+  вывестиАвтомобилиПоКатегории(категория) {
+    const автомобилиПоКатегории = this.автомобили.filter(
+      (автомобиль) => автомобиль.категория === категория
+    );
+
+    let txt = `<br>Автомобили категории ${категория}:`;
+    for (const автомобиль of автомобилиПоКатегории) {
+      txt += `<br>${автомобиль.марка}, ${автомобиль.год_выпуска}, ${автомобиль.регистрационный_номер}`;
+    }
+	
+	return txt
+  }
+}
+
+function task4_9() {
+	const автопарк = new Автопарк();
+
+	const автомобиль1 = new ЛегковойАвтомобиль("Марка1", 2023, "01/01/2023", "РН1");
+	const автомобиль2 = new ГрузовойАвтомобиль("Марка2", 2022, "01/01/2022", "РН2");
+
+	автопарк.добавитьАвтомобиль(автомобиль1);
+	автопарк.добавитьАвтомобиль(автомобиль2);
+
+	const output = document.getElementById('output_9');
+	
+	const найденныйАвтомобиль = автопарк.найтиАвтомобильПоНомеру(document.getElementById('input_9_1').value);
+	output.innerHTML = "<br>Найденный автомобиль: " + найденныйАвтомобиль;
+
+	output.innerHTML += автопарк.вывестиАвтомобилиПоКатегории(document.getElementById('input_9_2').value);
+}
+
+class Пользователь {
+  constructor(имя, фамилия) {
+    this.имя = имя;
+    this.фамилия = фамилия;
+    this.заблокирован = false;
+  }
+  
+  toString(){
+	  return `Пользователь ${this.имя} ${this.фамилия} заблокирован: ${this.заблокирован}`;
+  }
+}
+
+class Менеджер extends Пользователь {
+	constructor(имя, фамилия) {
+		super(имя, фамилия);
+	}
+
+	блокировать(пользователь, система) {
+		система.пользователи[система.пользователи.indexOf(пользователь)].заблокирован = true;
+	}
+
+	разблокировать(пользователь, система) {
+		система.пользователи[система.пользователи.indexOf(пользователь)].заблокирован = false;
+	}
+	
+	toString(){
+	  return `Менеджер ${this.имя} ${this.фамилия} заблокирован: ${this.заблокирован}`;
+  }
+}
+
+class Администратор extends Менеджер {
+	constructor(имя, фамилия) {
+		super(имя, фамилия);
+	}
+  	
+	добавитьПользователя(пользователь, система) {
+		система.пользователи.push(пользователь);
+	}
+
+	удалитьПользователя(пользователь) {
+		система.пользователи.delete[система.пользователи.indexOf(пользователь)];
+	}
+	
+	toString(){
+	  return `Администратор ${this.имя} ${this.фамилия} заблокирован: ${this.заблокирован}`;
+  }
+}
+
+class Система{
+	constructor(){
+		this.пользователи = [];
+	}
+	
+	найтиПользователяПоТипу(тип){
+		let пользователиПоТипу;
+		switch(тип){
+			case "Администратор":
+				пользователиПоТипу = this.пользователи.filter(
+					(пользователь) => пользователь instanceof Администратор
+				);
+			break;
+			case "Менеджер":
+				пользователиПоТипу = this.пользователи.filter(
+					(пользователь) => пользователь instanceof Менеджер
+				);
+			break;
+			case "Пользователь":
+				пользователиПоТипу = this.пользователи.filter(
+					(пользователь) => пользователь instanceof Пользователь
+				);
+			break;
+		}
+		
+
+		let txt = `<br>Пользователи по типу ${тип}:`;
+		for (const пользователь of пользователиПоТипу) {
+		  txt += `<br>${пользователь}`;
+		}
+		
+		return txt;
+	}
+	
+	найтиПользователя(фамилия) {
+		const пользователь = this.пользователи.find(
+		  (пользователь) => пользователь.фамилия === фамилия
+		);
+
+		if (пользователь) {
+			return `<br>Пользователь ${студент.фамилия} ${студент.имя} найден`;
+		} else {
+			return `<br>Пользователя с фамилией ${фамилия} не найдено`;
+		}
+	}
+}
+
+function task4_10() {
+	const система = new Система();
+	const администратор = new Администратор("Иван", "Иванов");
+	const менеджер = new Менеджер("Петр", "Петров");
+	const пользователь = new Пользователь("Петр", "Сидоров");
+
+	администратор.добавитьПользователя(администратор, система);
+	администратор.добавитьПользователя(менеджер, система);
+	администратор.добавитьПользователя(пользователь, система);
+	менеджер.блокировать(пользователь, система);
+
+	const output = document.getElementById('output_10');
+	output.innerHTML = система.найтиПользователяПоТипу(document.getElementById('input_10_1').value);
+	output.innerHTML += "<br>" + система.найтиПользователя(document.getElementById('input_10_2').value);
+}
+
+class Тур {
+  constructor(тип, дата) {
+    this.тип = тип;
+    this.дата = дата;
+  }
+  
+  toString(){
+	  return `Тип: ${this.тип}, дата: ${this.дата}`;
+  }
+}
+
+class ВелоТур extends Тур {
+  constructor(дата) {
+    super("велотур", дата);
+  }
+}
+
+class АвтоТур extends Тур {
+  constructor(дата) {
+    super("автотур", дата);
+  }
+}
+
+class ГастрономическийТур extends Тур {
+  constructor(дата) {
+    super("гастрономический тур", дата);
+  }
+}
+
+function task4_11(){
+	const туры = [
+	  new ВелоТур("01/01/2023"),
+	  new АвтоТур("02/01/2023"),
+	  new ГастрономическийТур("03/01/2023"),
+	  new ВелоТур("05/01/2023"),
+	  new АвтоТур("02/05/2023"),
+	  new ГастрономическийТур("05/02/2023"),
+	];
+	
+	const output = document.getElementById('output_11');
+	туры.sort((a, b) => a.тип.localeCompare(b.тип));
+	
+	output.innerHTML = "<br>Все туры:<br>";
+	for (const тур of туры){
+		output.innerHTML += тур + "<br>";
+	}
+	
+	const date = document.getElementById('input_11').value;
+	if (date)
+	{	
+		const турыНаДату = туры.filter((тур) => тур.дата === date);
+
+		output.innerHTML += `Туры на дату ${date}:<br>` + турыНаДату;
+	}
+}

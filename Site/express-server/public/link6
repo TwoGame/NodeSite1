@@ -1,0 +1,32 @@
+<p><b>Тема работы:</b> Использование технологии AJAX для взаимодействия с серверной частью web-приложения.<br></p>
+<br>
+<p></p><b>Цель работы:</b> Научиться использовать метод fetch для отправки и получения данных от web-сервера.<br></p>
+<br>
+<p></p><b>Задание:</b>
+Релазивать CRUD операции с использованием технологии ajax для произвольной предметной области. Реализовать сервер с помощью веб-фреймворка Express для приложений node.js. Хранение данных организовать с помощью базы данных либо на стороне сервера.
+Пример отправки данных с использованием метода fetch:<br><br>
+<code>
+const url = 'https://example.com/profile';<br>
+const data = { username: 'example' };<br>
+  <br>
+try {<br>
+  const response = await fetch(url, {<br>
+    method: 'POST', // или 'PUT'<br>
+    body: JSON.stringify(data), // данные могут быть 'строкой' или {объектом}!<br>
+    headers: {<br>
+      'Content-Type': 'application/json'<br>
+    }<br>
+  });<br>
+  const json = await response.json();<br>
+  console.log('Успех:', JSON.stringify(json));<br>
+} catch (error) {<br>
+  console.error('Ошибка:', error);<br>
+  }<br>
+</code></p>
+<br>
+<p>Пример команды для установки фреймворкa:<br>
+  <code>npm install express-generator –g</code><br></p>
+<br>
+<p>Пример команды для генерации структуры простейшего web-приложения:<br>
+<code>express --view=pug myapp</code><br>
+  Команда для просмотра списка доступных команд: <code>express -h</code><br></p>

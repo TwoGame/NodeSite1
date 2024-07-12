@@ -1,0 +1,147 @@
+<ol> 
+	 <li>Создайте класс Vector для представления вектора в трехмерном пространстве (свойства для координат x, y, z). Добавьте в прототип Vector два метода plus() и scalar() для вычисления суммы двух векторов и скалярного произведения двух векторов. Добавьте в прототип свойство только для чтения length, подсчитывающее длину вектора. Переопределите в классе Vector методы toString() и valueOf(). Протестируйте созданный класс.<br> 
+	 <div class=task-container> 
+					 <div class=task> 
+						 V1<br>x:<input id=input_1_1 type=number><br> 
+						 y:<input id=input_1_2 type=number><br> 
+						 z:<input id=input_1_3 type=number> 
+				  </div> 
+				  <div class=task> 
+					 	V2<br>x:<input id=input_1_4 type=number><br> 
+					 	y:<input id=input_1_5 type=number><br> 
+					 	z:<input id=input_1_6 type=number> 
+				  </div>  
+				  <input type=button value=Нажми меня onclick=task4_1()> 
+			  </div> 
+			 	Вывод: <span id=output_1></span> 
+		  </li><br> 
+		  <li>Задача имеет название, описание, дату начала и дату окончания. Любая задача может иметь набор дочерних подзадач. Создайте класс для представления задачи. Выполняемая задача – наследник задачи с дополнительными свойствами: - процент выполнения (число); - флаг задача завершена.<br> 
+		  <div class=task-container> 
+			  <div class=task> 
+				 	Задача<br>Название: <input id=input_2_1 type=text><br>Описание: <input id=input_2_2 type=text><br>Начало: <input id=input_2_3 type=date><br>Конец: <input id=input_2_4 type=date> 
+			  </div> 
+			  <div class=task> 
+				 	Выполняемая задача <br>Название: <input id=input_2_5 type=text><br>Описание: <input id=input_2_6 type=text><br>Начало: <input id=input_2_7 type=date><br>Конец: <input id=input_2_8 type=date><br>Процент выполнения: <input id=input_2_9 type=number><br>Задача завершена: <input id=input_2_10 type=checkbox> 
+			  </div> 
+			  <input type=button value=Нажми меня onclick=task4_2()> 
+		  </div> 
+		 	Вывод: <span id=output_2></span> 
+		  </li><br> 
+		  <li>Реализовать базовый класс Point, который характеризуется положением на осях координат (свойства для координат x, y, z) и условным обозначением (имя объекта-точки). Определите класс-наследник ColorPoint, который наследует свойства родительского класса и имеет дополнительную характеристику (с дополнительными полем &quot;цвет&quot; ). Создать коллекцию разработанных объектов и создать методы класса для доступа к значениям его полей. Написать функцию, которая осуществляет поиск по набору точек и ищет ближайюшую для заданных координат.<br> 
+			  <div class=task-container> 
+				  <div class=task> 
+					 	X: <input id=input_3_1 type=number><br> 
+					 	Y: <input id=input_3_2 type=number><br> 
+					 	Z: <input id=input_3_3 type=number> 
+				  </div> 
+				  <input type=button value=Нажми меня onclick=task4_3()> 
+			  </div> 
+				 Вывод: <span id=output_3></span><br> 
+		  </li><br> 
+		  <li>Реализовать базовый класс Фигура, который характеризуется набором точек (x,y). Создать классы наследники (Квадрат, Круг, Треугольник). Для классов наследников реализовать возможность вычисления площади и периметра, методы доступа к расчётным значениям.<br> 
+			  <div class=task-container> 
+				  <div class=task> 
+					 	Квадрат<br> 
+					 	X1: <input id=input_4_1 type=number><br> 
+					 	Y1: <input id=input_4_2 type=number><br> 
+					 	X2: <input id=input_4_3 type=number><br> 
+					 	Y2: <input id=input_4_4 type=number> 
+				  </div> 
+				  <div class=task> 
+					 	Круг<br> 
+					 	X1: <input id=input_4_5 type=number><br> 
+					 	Y1: <input id=input_4_6 type=number><br> 
+					 	X2: <input id=input_4_7 type=number><br> 
+					 	Y2: <input id=input_4_8 type=number> 
+				  </div> 
+				  <div class=task> 
+					 	Треугольник<br> 
+					 	X1: <input id=input_4_9 type=number><br> 
+					 	Y1: <input id=input_4_10 type=number><br> 
+					 	X2: <input id=input_4_11 type=number><br> 
+					 	Y2: <input id=input_4_12 type=number><br> 
+					 	X3: <input id=input_4_13 type=number><br> 
+					 	Y3: <input id=input_4_14 type=number> 
+				  </div> 
+				  <input type=button value=Нажми меня onclick=task4_4()> 
+			  </div>Вывод: <span id=output_4></span></li><br> 
+		  <li>Реализуйте класс Работник, который будет иметь следующие свойства: 	имя, фамилия, ставка за день работы, количество отработанных дней. Также класс должен иметь метод getSalary(), который будет выводить зарплату работника. Создайте класс наследник для работников с определённой специализацией (маляр, штукатур), в котором добавьте поле “тип выполняемых работ”. Реализуйте возможность формирования бригады с работниками различной специализации.<br> 
+			  <div class=task-container> 
+				  <div class=task> 
+						 Маляр<br> 
+						 Имя: <input id=input_5_1 type=text><br> 
+						 Фамилия: <input id=input_5_2 type=text><br> 
+						 Ставка: <input id=input_5_3 type=number><br> 
+						 Отработанные дни: <input id=input_5_4 type=number> 
+				  </div> 
+				  <div class=task> 
+						 Штукатур<br> 
+						 Имя: <input id=input_5_5 type=text><br> 
+						 Фамилия: <input id=input_5_6 type=text><br> 
+						 Ставка: <input id=input_5_7 type=number><br> 
+						 Отработанные дни: <input id=input_5_8 type=number> 
+				  </div> 
+				  <input type=button value=Нажми меня onclick=task4_5()> 
+			  </div> 
+				 Вывод: <span id=output_5></span><br> 
+		  </li><br> 
+		  <li>Реализуйте родительский класс Validator с произвольными полями и методами доступа к ним. Создайте классы-наследники для валидации телефонных номеров, email-адресов и  доменов сайтов. Сформируйте тестовый набор данных для проверки с помощью реализованных классов-валидаторов. Для проверки значений допускается использование регулярных выражений.<br> 
+			  <div class=task-container> 
+				  <div class=task> 
+						 Телефон: <input id=input_6_1 type=text><br> 
+						 Почта: <input id=input_6_2 type=text><br> 
+						 Домен: <input id=input_6_3 type=text><br> 
+				  </div> 
+				  <input type=button value=Нажми меня onclick=task4_6()> 
+			  </div> 
+				 Вывод: <span id=output_6></span><br> 
+		  </li><br> 
+		  <li>Реализуйте класс Библиотека, в котором будет храниться коллекция объектов класса Издание. Создайте классы-наследники для различных типов изданий с соответствующими полями (имя, год издания, тип, автор(ы) и т.д.). Предусмотреть возможность поиска издания по нескольким параметрам и их сортировки по автору.<br> 
+			  <div class=task-container> 
+				  <div class=task> 
+						 Поиск по: <input id=input_7_1 type=text> 
+				  </div> 
+				  <input type=button value=Нажми меня onclick=task4_7()> 
+			  </div> 
+				 Вывод: <span id=output_7></span><br> 
+		  </li><br> 
+		  <li>Реализуйте класс Факультет, который хранит список студентов. Класс Студент содержит информацию о студенте. Создайте классы-наследники для студентов отдельных специальностей. В программе предусмотреть возможность вывода всех студентов заданной специальности и поиска студента по фамилии.<br> 
+			  <div class=task-container> 
+				  <div class=task> 
+						 Поиск по предмету: <input id=input_8_1 type=text><br> 
+						 Поиск по фамилии: <input id=input_8_2 type=text> 
+				  </div> 
+				  <input type=button value=Нажми меня onclick=task4_8()> 
+			  </div> 
+				 Вывод: <span id=output_8></span><br> 
+		  </li><br> 
+		  <li>Реализуйте класс Автопарк, который содержит коллекцию автомобилей организации. Класс Автомобиль должен содержать следующие поля: марка, год выпуска, дата последнего обслуживания, регистрационный номер. Создать классы-наследники для транспортных средств различной категории (легковые, грузовый и т.д.) Предусмотреть возможность вывода автомобилей соответствующей категории и поиска автомобиля по номеру.<br> 
+			  <div class=task-container> 
+				  <div class=task> 
+						 Поиск по номеру: <input id=input_9_1 type=text><br> 
+						 Поиск по категории: <input id=input_9_2 type=text> 
+				  </div> 
+				  <input type=button value=Нажми меня onclick=task4_9()> 
+			  </div> 
+				 Вывод: <span id=output_9></span><br> 
+		  </li><br> 
+		  <li>Разработать класс Пользователь. Реализовать иерархию классов-наследников согласно типам пользователей в системе организации (класс Информационная система). Предусмотреть вывод пользователей определённой группы, поиск пользователя. Реализовать возможность блокировки, добавления и удаления пользователя из системы. <br> 
+			  <div class=task-container> 
+				  <div class=task> 
+						 Поиск по типу: <input id=input_10_1 type=text><br> 
+						 Поиск по фамилии: <input id=input_10_2 type=text> 
+				  </div> 
+				  <input type=button value=Нажми меня onclick=task4_10()> 
+			  </div> 
+				 Вывод: <span id=output_10></span><br> 
+		  </li><br> 
+		  <li>Создать класс Тур. Организовать иерархию наследования туров согласно их типам (велотуры, автотуры, гастрономические туры и т.д.). Предусмотреть возможность подбора тура заданного типа на конкретную дату. При выводе списка туров производить группировку по типам. <br> 
+			  <div class=task-container> 
+				  <div class=task> 
+						 Поиск по дате: <input id=input_11 type=text> 
+				  </div> 
+				  <input type=button value=Нажми меня onclick=task4_11()> 
+			  </div> 
+				 Вывод: <span id=output_11></span><br>
+		  </li><br>
+	  </ol>
