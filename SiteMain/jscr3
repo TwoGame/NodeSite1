@@ -1,0 +1,86 @@
+function generateRandomString(length) {
+  let result = '';
+  const characters = 'abcdefghijklmnopqrstuvwxyz';
+  const charactersLength = characters.length;
+  
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  
+  return result;
+}
+
+function task3_1(){
+	const randomString = generateRandomString(10);
+	const upperCaseCharacters = Array.from(randomString).map((char) => char.toUpperCase());
+	const characterCodes = upperCaseCharacters.map((char) => char.charCodeAt(0));
+	const filteredCharacterCodes = characterCodes.filter((code) => code % 5 !== 0);
+	const sumOfRemainders = filteredCharacterCodes.reduce((accumulator, code) => accumulator + (code % 5), 0);
+	
+	document.getElementById('output_1').innerHTML = 'Сгенерированная строка: ' + randomString.toString() + '<br>Массив кодов символов: ' + characterCodes.toString() + '<br>Коды символов, не делящиеся на 5: ' + filteredCharacterCodes.toString() + '<br>Сумма остатков деления кодов на 5: ' + sumOfRemainders;
+}
+
+function generateRandomNumber(s, p) {
+  const min = s - (s * p / 100); console.log('min:', min);
+  const max = s + (s * p / 100); console.log('max:', max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function task3_2(){
+	const array = [];
+	const s = Number(document.getElementById('input_2_1').value);
+	const p = Number(document.getElementById('input_2_2').value);
+
+	for (let i = 0; i < 1000; i++) {
+	  array.push(generateRandomNumber(s, p));
+	}
+
+	array.sort((a, b) => (b % 10) - (a % 10));
+	
+	for (let i = 1; i < 20; i++){
+		document.getElementById('output_2').innerHTML += array.slice(array.length / 20 * (i - 1), array.length / 20 * i) + '<br>';
+	}
+}
+
+function averageArithmetic(...args) {
+  const sum = args.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  const arithmeticMean = sum / args.length;
+  return arithmeticMean;
+}
+
+function averageHarmonic(...args) {
+  const reciprocalSum = args.reduce((accumulator, currentValue) => accumulator + (1 / currentValue), 0);
+  const harmonicMean = args.length / reciprocalSum;
+  return harmonicMean;
+}
+
+function task3_3(){
+	const numbers = document.getElementById('input_3').value.replace(/[A-z][А-я]/gi, "").split(' ').map(Number);
+	
+	document.getElementById('output_3').innerHTML = 'Среднее арифметическое: ' + averageArithmetic(...numbers) + '<br>Среднее гармоническое: ' + averageHarmonic(...numbers);
+}
+
+const names = ["Alice", "Bob", "Charlie", "David", "Eve", "Frank", "Grace", "Henry", "Isabella", "Jack"];
+const people = [];
+
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  
+  this.introduce = function() {
+    return `My name is ${this.name} and I am ${this.age} years old.`;
+  }
+}
+
+function task3_4(){
+	for (let i = 0; i < 20; i++) {
+	  const name = names[Math.floor(Math.random() * names.length)];
+	  const age = Math.floor(Math.random() * 100) + 1;
+	  
+	  people.push(new Person(name, age));
+	}
+
+	let elem = document.getElementById('output_4');
+	
+	people.forEach((person) => elem.innerHTML += person.introduce() + '<br>');
+}

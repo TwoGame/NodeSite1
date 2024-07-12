@@ -1,0 +1,52 @@
+function parseJSON(data) {
+  return new Promise((resolve, reject) => {
+    // Шаг 2: Преобразование содержимого файла в объект
+    try {
+      const obj = JSON.parse(data);
+      resolve(obj);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+// Шаг 3: Формирование списка оставшихся лабораторных работ на текущую дату
+function filterLabWorksByDate(data, currentDate) {
+  const labWorks = data.дисциплины.reduce((acc, discipline) => {
+    const remainingLabWorks = discipline.лабораторные_работы.filter(
+      (labWork) => new Date(labWork.дата_сдачи).getTime() >= new Date(currentDate).getTime()
+    );
+    if (remainingLabWorks.length > 0) {
+      acc[discipline.наименование] = remainingLabWorks;
+    }
+    return acc;
+  }, {});
+  return labWorks;
+}
+
+// Шаг 4: Вывод полученного списка
+function printLabWorks(labWorks) {
+  let txt = 'Список оставшихся лабораторных работ:<br>';
+  for (const [discipline, remainingLabWorks] of Object.entries(labWorks)) {
+    txt += `Дисциплина: ${discipline}<br>`;
+    for (const labWork of remainingLabWorks) {
+      txt += `- Наименование: ${labWork.наименование}<br>`;
+      txt += `  Дата сдачи: ${labWork.дата_сдачи}<br>`;
+      txt += `  Полученная отметка: ${labWork.полученная_отметка}<br>`;
+    }
+  }
+  
+  document.querySelector('.main').innerHTML = txt;
+}
+
+function printError(err){
+	document.querySelector('.main').innerHTML = 'Ошибка: ' + err;
+}
+
+function onLoad(){
+	const output = document.getElementById("output");
+	parseJSON(data)
+		.then((data) => filterLabWorksByDate(data, new Date()))
+		.then(printLabWorks)
+		.catch((err) => printError(err));
+}

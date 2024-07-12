@@ -1,0 +1,125 @@
+function task2_1(){
+	const txt = document.getElementById('input_1').value;
+	let words = txt.split(' ');
+	document.getElementById('output_1').innerHTML = words[words.length - 2];
+}
+
+function task2_2(){
+	const str1 = document.getElementById('input_2_1').value.split('').sort().join('');
+	const str2 = document.getElementById('input_2_2').value.split('').sort().join('');
+	
+	if(str1.toLowerCase() === str2.toLowerCase()){
+		document.getElementById('output_2').innerHTML = true;
+	}
+	else{
+		document.getElementById('output_2').innerHTML = false;
+	}
+}
+
+function task2_3(){
+	const str = document.getElementById('input_3').value;
+	
+	document.getElementById('output_3').innerHTML = str.replace(/[аеёиоуыэюя]/gi, "");
+}
+
+function task2_4(){
+	const array = [];
+	for (let i = 0; i < 20; i++) {
+	  const randomNumber = Math.floor(Math.random() * (200 - 100 + 1)) + 100;
+	  array.push(randomNumber);
+	}
+	document.getElementById('output_4').innerHTML = array.toString();
+}
+
+function task2_5(){
+	const characters = 'abcdefghijklmnopqrstuvwxyz';
+	let result = '';
+	for (let i = 0; i < 20; i++) {
+		const randomIndex = Math.floor(Math.random() * characters.length);
+		result += characters[randomIndex];
+	}
+	document.getElementById('output_5').innerHTML = result.toString();
+}
+
+function task2_6(){
+	const array = document.getElementById('input_6').value.replace(/[A-z][А-я]/gi, "").split(' ').map(Number);
+	
+	let count = 0;
+	let sum = 0;
+
+	for (let i = 0; i < array.length; i++) {
+	  if (array[i] % 3 === 0) {
+		count++;
+		sum += array[i];
+	  }
+	}
+	
+	document.getElementById('output_6').innerHTML = "<br>Количество элементов, делящихся на 3: " + count + "<br>Сумма элементов, делящихся на 3: " + sum;
+}
+
+function task2_7(){
+	const arr = document.getElementById('input_7').value.replace(/[A-z][А-я]/gi, "").split(' ').map(Number);
+	
+	for (let i = 0, endI = arr.length - 1; i < endI; i++) {
+		let wasSwap = false;
+		for (let j = 0, endJ = endI - i; j < endJ; j++) {
+		  if (arr[j] > arr[j + 1]) {
+			[arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+			wasSwap = true;
+		  }
+		}
+		if (!wasSwap) break;
+	}
+	  
+	document.getElementById('output_7').innerHTML = arr.toString();
+}
+
+function task2_8(){
+	const startDate = new Date("August 13, 1988 10:00:00");
+	const endDate = new Date("December 22, 2033 17:00:00");
+
+	const timeDifference = endDate - startDate;
+	const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+
+	document.getElementById('output_8').innerHTML = "Количество часов: " + hours;
+}
+
+function task2_9(){
+	const now = new Date();
+	const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+	const timeDifference = endOfDay - now;
+	const secondsRemaining = Math.floor(timeDifference / 1000);
+
+	document.getElementById('output_9').innerHTML = "Количество секунд до конца дня: " + secondsRemaining;
+}
+
+function task2_10(){
+	const startDate = "January 1, 2000";
+	const endDate = "January 1, 2020";
+	const array = [];
+
+	for (let i = 0; i < 10; i++) {
+	  array.push(generateRandomDate(startDate, endDate));
+	}
+
+	array.sort((a, b) => a - b);
+
+	let minDifferenceInSeconds = Number.MAX_SAFE_INTEGER;
+
+	for (let i = 0; i < array.length - 1; i++) {
+	  const differenceInSeconds = Math.abs((array[i + 1] - array[i]) / 1000);
+	  
+	  if (differenceInSeconds < minDifferenceInSeconds) {
+		minDifferenceInSeconds = differenceInSeconds;
+	  }
+	}
+
+	document.getElementById('output_10').innerHTML = "<br>Массив случайных дат: " + array + "<br>Разница в секундах между ближайшими датами: " + minDifferenceInSeconds
+}
+
+function generateRandomDate(start, end) {
+  const startDate = new Date(start).getTime();
+  const endDate = new Date(end).getTime();
+  const randomTimestamp = Math.floor(Math.random() * (endDate - startDate + 1)) + startDate;
+  return new Date(randomTimestamp);
+}
